@@ -1,6 +1,8 @@
 const express = require("express")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 const usersModel = require("../data/usersModel")
+const secrets = require("../config/secrets")
 
 const router = express.Router()
 
@@ -30,7 +32,9 @@ router.post('/login', async (req, res, next) => {
     const validPassword = await bcrypt.compare(password, user.password)
 
     if(user && validPassword) {
-      res.status(200).json({ message: `Welcome ${user.username}!`})
+      const token = generateToken(user)
+      
+      res.status(200).json({ status: 200, token, message: `Welcome ${user.username}!` })
     } else {
       return res.status(401).json({ message: 'Invalid credentials.' })
     }
@@ -60,5 +64,19 @@ router.delete('/users/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+// generate JSON web token
+function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username,
+  }
+
+  const options = {
+    expiresIn: '30d'
+  }
+
+  return jwt.sign(payload, secrets.jwtSecret, options)
+}
 
 module.exports = router
