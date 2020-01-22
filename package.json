@@ -1,0 +1,27 @@
+{
+  "name": "webauth-iii-challenge",
+  "version": "1.0.0",
+  "description": "## Topics",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clifhodges13/webauth-iii-challenge.git"
+  },
+  "author": "Clifton Hodges",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clifhodges13/webauth-iii-challenge/issues"
+  },
+  "homepage": "https://github.com/clifhodges13/webauth-iii-challenge#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.20.8",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
